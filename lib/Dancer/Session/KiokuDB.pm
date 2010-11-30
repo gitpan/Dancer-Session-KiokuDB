@@ -2,16 +2,16 @@ use strict;
 use warnings;
 package Dancer::Session::KiokuDB;
 BEGIN {
-  $Dancer::Session::KiokuDB::VERSION = '0.01';
+  $Dancer::Session::KiokuDB::VERSION = '0.02';
 }
 # ABSTRACT: KiokuDB Dancer session backend
 
 use Carp;
 use base 'Dancer::Session::Abstract';
 
-# to have access to configuration data and a helper for paths
 use KiokuDB;
 
+# to have access to configuration data and a helper for paths
 use Dancer::Logger;
 use Dancer::Config    'setting';
 use Dancer::FileUtils 'path';
@@ -21,7 +21,7 @@ my ( $db, $warned );
 
 sub init {
     my $self    = shift;
-    my $backend = setting('kiokudb_backend') || 'DBI';
+    my $backend = setting('kiokudb_backend') || 'Hash';
     my $class   = "KiokuDB::Backend::$backend";
     my %opts    = ();
 
@@ -31,8 +31,6 @@ sub init {
         } else {
             croak 'kiokudb_backend_opts must be a hash reference';
         }
-    } else {
-        croak 'Missing kiokudb_backend_opts';
     }
 
     defined $opts{'create'} or $opts{'create'} = 1;
@@ -96,7 +94,7 @@ Dancer::Session::KiokuDB - KiokuDB Dancer session backend
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

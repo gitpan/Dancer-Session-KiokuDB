@@ -30,4 +30,4 @@ requires:
   KiokuDB: 0
 resources:
   repository: http://github.com/xsawyerx/dancer-session-kiokudb
-version: 0.01
+version: 0.02
