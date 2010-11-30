@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dancer::Session::KiokuDB;
 BEGIN {
-  $Dancer::Session::KiokuDB::VERSION = '0.02';
+  $Dancer::Session::KiokuDB::VERSION = '0.03';
 }
 # ABSTRACT: KiokuDB Dancer session backend
 
@@ -25,6 +25,7 @@ sub init {
     my $class   = "KiokuDB::Backend::$backend";
     my %opts    = ();
 
+    # making sure that if we get backend opts, they're a hashref
     if ( my $opts = setting('kiokudb_backend_opts') ) {
         if ( ref $opts and ref $opts eq 'HASH' ) {
             %opts = %{$opts};
@@ -33,10 +34,11 @@ sub init {
         }
     }
 
+    # default is to create
     defined $opts{'create'} or $opts{'create'} = 1;
 
     if ( not $warned ) {
-        Dancer::Logger::warning("No session KiokuDB backend, using 'DBI'");
+        Dancer::Logger::warning("No session KiokuDB backend, using 'Hash'");
         $warned++;
     }
 
@@ -94,7 +96,7 @@ Dancer::Session::KiokuDB - KiokuDB Dancer session backend
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -115,10 +117,43 @@ version 0.02
 
 When you want to save session information, you can pick from various session
 backends, and they each determine how the session information will be saved. You
-can use L<Dancer::Session::Cookie> or L<Dancer::Session::MongoDB> or you can now
-use L<Dancer::Session::KiokuDB>.
+can use L<Dancer::Session::Cookie>, L<Dancer::Session::MongoDB> or...
+you use L<Dancer::Session::KiokuDB>.
 
 This backend uses L<KiokuDB> to save and access session data.
+
+=head1 OPTIONS
+
+=head2 kiokudb_backend
+
+A string which specifies what backend to use, under C<KiokuDB::Backend>, that
+means that backend I<DBI> will be C<KiokuDB::Backend::DBI>. If you'll get smart
+and provide I<KiokuDB::Backend::Cool>, you'll get
+C<KiokuDB::Backend::KiokuDB::Backend::Cool>, which is, evidently, not cool! :)
+
+Not mandatory.
+
+The default backend is L<KiokuDB::Backend::Hash>.
+
+=head2 kiokudb_backend_opts
+
+A hash reference which indicates options you want to send to the backend's
+C<new()> method.
+
+Not mandatory.
+
+The default opts are C<<create => 1>>. If you do not want it to automatically
+create, set:
+
+    # in your app
+    set kiokudb_backend_opts => {
+        create => 0,
+        ...
+    };
+
+    # or in your configuration
+    kiokudb_backend_opts:
+        create: 0
 
 =head1 SUBROUTINES/METHODS
 
