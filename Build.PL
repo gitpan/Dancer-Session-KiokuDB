@@ -24,7 +24,7 @@ my %module_build_args = (
     'Sawyer X <xsawyerx@cpan.org>'
   ],
   'dist_name' => 'Dancer-Session-KiokuDB',
-  'dist_version' => '0.03',
+  'dist_version' => '0.04',
   'license' => 'perl',
   'module_name' => 'Dancer::Session::KiokuDB',
   'recommends' => {},

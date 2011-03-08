@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dancer::Session::KiokuDB;
 BEGIN {
-  $Dancer::Session::KiokuDB::VERSION = '0.03';
+  $Dancer::Session::KiokuDB::VERSION = '0.04';
 }
 # ABSTRACT: KiokuDB Dancer session backend
 
@@ -24,6 +24,8 @@ sub init {
     my $backend = setting('kiokudb_backend') || 'Hash';
     my $class   = "KiokuDB::Backend::$backend";
     my %opts    = ();
+
+    $self->SUPER::init(@_);
 
     # making sure that if we get backend opts, they're a hashref
     if ( my $opts = setting('kiokudb_backend_opts') ) {
@@ -96,7 +98,7 @@ Dancer::Session::KiokuDB - KiokuDB Dancer session backend
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

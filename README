@@ -2,7 +2,7 @@ NAME
     Dancer::Session::KiokuDB - KiokuDB Dancer session backend
 
 VERSION
-    version 0.03
+    version 0.04
 
 SYNOPSIS
         # in your Dancer app:
