@@ -30,6 +30,7 @@ my %WriteMakefileArgs = (
   'NAME' => 'Dancer::Session::KiokuDB',
   'PREREQ_PM' => {
     'Carp' => '0',
+    'Dancer' => '1.3012',
     'Dancer::Config' => '0',
     'Dancer::FileUtils' => '0',
     'Dancer::Logger' => '0',
@@ -37,7 +38,7 @@ my %WriteMakefileArgs = (
     'Dancer::Session::Abstract' => '0',
     'KiokuDB' => '0'
   },
-  'VERSION' => '0.04',
+  'VERSION' => '0.05',
   'test' => {
     'TESTS' => 't/*.t'
   }

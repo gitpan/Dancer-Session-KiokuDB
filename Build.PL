@@ -24,13 +24,14 @@ my %module_build_args = (
     'Sawyer X <xsawyerx@cpan.org>'
   ],
   'dist_name' => 'Dancer-Session-KiokuDB',
-  'dist_version' => '0.04',
+  'dist_version' => '0.05',
   'license' => 'perl',
   'module_name' => 'Dancer::Session::KiokuDB',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
     'Carp' => '0',
+    'Dancer' => '1.3012',
     'Dancer::Config' => '0',
     'Dancer::FileUtils' => '0',
     'Dancer::Logger' => '0',
